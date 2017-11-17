@@ -1,0 +1,48 @@
+<form class="reminder-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+  <!-- Title Input -->
+  <mat-form-field class="reminder-full-width">
+    <input matInput [formControl]="titleFormControl" placeholder="Title" name="title" type="text" [(ngModel)]="reminder.title">
+    <mat-error *ngIf="titleFormControl.hasError('required')">
+      Title is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <br>
+
+  <!-- Description Textarea -->
+  <mat-form-field class="reminder-full-width">
+    <textarea name="description" [formControl]="descriptionFormControl" [(ngModel)]="reminder.description" matInput placeholder="Enter Description"
+      matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    <mat-error *ngIf="descriptionFormControl.hasError('required')">
+      Description is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <br>
+
+  <!-- Date Datepicker -->
+  <mat-form-field class="reminder-full-width">
+    <input matInput [formControl]="dateFormControl" [min]="minDate" [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="reminderDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="dateFormControl.hasError('required')">
+      Date is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <br>
+
+  <!-- Time Input -->
+  <mat-form-field class="reminder-full-width">
+    <input matInput [formControl]="timeFormControl" placeholder="Choose a time" name="time" type="time" [(ngModel)]="reminderTime">
+    <mat-error *ngIf="timeFormControl.hasError('required')">
+      Time is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <br>
+
+  <input type="submit" class="mat-raised-button" value="Save">
+  <button mat-button (click)="cancel()">Cancel</button>
+</form>

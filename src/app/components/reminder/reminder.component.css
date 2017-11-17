@@ -1,0 +1,9 @@
+.reminder-form {
+    min-width: 150px;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .reminder-full-width {
+    width: 100%;
+  }

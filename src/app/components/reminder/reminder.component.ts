@@ -29,7 +29,8 @@ export class ReminderComponent implements OnInit {
   reminder: Reminder = {
     title: '',
     description: '',
-    dateTimeOfRemind: null
+    dateTimeOfRemind: null,
+    tags: new Array()
   };
   reminderDate: Date; //binding with datetimepicker
   reminderTime: string; //binding with input of "time" type

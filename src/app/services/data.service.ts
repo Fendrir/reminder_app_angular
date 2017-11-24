@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Reminder } from '../models/Reminder';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DataService {
+  reminders: Reminder[] = [];
 
-  reminders: Reminder[];
+  private searchSource = new BehaviorSubject<string>('');//for binding between components "toolbar" and "reminders-list"
+  currentSearch = this.searchSource.asObservable();//for binding between components "toolbar" and "reminders-list"
 
   constructor() {
   }
@@ -45,4 +48,9 @@ export class DataService {
     }
   }
 
+
+  //for binding between components "toolbar" and "reminders-list"
+  changeSearchText(searchText: string) {
+    this.searchSource.next(searchText)
+  }
 }

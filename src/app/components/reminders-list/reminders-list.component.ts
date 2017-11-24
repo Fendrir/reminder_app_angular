@@ -12,12 +12,17 @@ export class RemindersListComponent implements OnInit {
 
   reminders: Reminder[];
 
+  searchText: string;
+
   constructor(
     public  dataService: DataService,
   ) { }
 
   ngOnInit() {
     this.reminders = this.dataService.getReminders();
+    
+    //subscribing on changes of search text
+    this.dataService.currentSearch.subscribe(message => this.searchText = message);
   }
 
   removeReminder(reminder) {

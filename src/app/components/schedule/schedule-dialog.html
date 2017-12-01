@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{ data.reminder.title }}</h1>
+<div mat-dialog-content>
+    <p>{{ data.reminder.dateTimeOfRemind | date }} {{ data.reminder.dateTimeOfRemind | date:"HH:mm" }}</p>
+    <p>Description:<br>
+    {{ data.reminder.description }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data.reminder" tabindex="2">Ok</button>
+</div>

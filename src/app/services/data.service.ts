@@ -4,13 +4,34 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DataService {
-  reminders: Reminder[] = [];
-
   private searchSource = new BehaviorSubject<string>('');//for binding between components "toolbar" and "reminders-list"
   currentSearch = this.searchSource.asObservable();//for binding between components "toolbar" and "reminders-list"
 
+  private period = new BehaviorSubject<string>('all');//for binding between components "sideNav" and "reminders-list"
+  currentPeriod = this.period.asObservable();//for binding between components "sideNav" and "reminders-list"
+
   constructor() {
   }
+
+
+  //for binding between components "toolbar" and "reminders-list"
+  changeSearchText(searchText: string) {
+    this.searchSource.next(searchText);
+  }
+
+  //for binding between components "sideNav" and "reminders-list"
+  changePeriod(period: string) {
+    this.period.next(period);
+  }
+
+
+  /*
+  ----------------------------------------------------------------------
+  --------------------- FOR LOCAL STORAGE ------------------------------
+  ----------------------------------------------------------------------
+  */
+
+  reminders: Reminder[] = [];
 
   //return list of reminders from local storage
   getReminders() {
@@ -46,11 +67,5 @@ export class DataService {
         localStorage.setItem('reminders', JSON.stringify(this.reminders));
       }
     }
-  }
-
-
-  //for binding between components "toolbar" and "reminders-list"
-  changeSearchText(searchText: string) {
-    this.searchSource.next(searchText)
   }
 }

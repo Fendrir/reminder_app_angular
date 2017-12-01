@@ -11,9 +11,14 @@ export class FilterPipe implements PipeTransform {
     if (!searchText) return reminders;
     searchText = searchText.toLowerCase();
     return reminders.filter(reminders => {
-      return reminders.title.toLowerCase().includes(searchText) //search by title
-            || reminders.description.toLowerCase().includes(searchText) //search by description
-            || reminders.tags.toString().toLowerCase().includes(searchText);  //search by tags
+      if (reminders.tags !== undefined) {
+        return reminders.title.toLowerCase().includes(searchText) //search by title
+              || reminders.description.toLowerCase().includes(searchText) //search by description
+              || reminders.tags.toString().toLowerCase().includes(searchText);  //search by tags
+      } else {
+        return reminders.title.toLowerCase().includes(searchText) //search by title
+              || reminders.description.toLowerCase().includes(searchText) //search by description
+      }
     });
   }
 

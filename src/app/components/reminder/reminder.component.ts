@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Reminder } from '../../models/Reminder';
-import { DataService } from '../../services/data.service';
+//import { DataService } from '../../services/data.service';
+import { ReminderFbService } from '../../services/reminder-fb.service';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 
@@ -29,7 +30,7 @@ export class ReminderComponent implements OnInit {
   reminder: Reminder = {
     title: '',
     description: '',
-    dateTimeOfRemind: null,
+    dateTimeOfRemind: 0,
     tags: new Array()
   };
   reminderDate: Date; //binding with datetimepicker
@@ -38,7 +39,8 @@ export class ReminderComponent implements OnInit {
 
 
   constructor(
-    private dataService: DataService,
+    //private dataService: DataService,
+    private reminderService: ReminderFbService,
     private router: Router
   ) {  }
 
@@ -47,7 +49,7 @@ export class ReminderComponent implements OnInit {
 
   //to create a date for the property "Reminder.dateTimeOfRemind"
   createFullDateReminder(reminderDate: Date, reminderTime: string) {
-      return new Date(Date.parse(reminderDate.toDateString() + " " + reminderTime));
+      return new Date(Date.parse(reminderDate.toDateString() + " " + reminderTime)).getTime();
   }
 
   onSubmit({ value, valid }: { value: Reminder, valid: boolean }) {
@@ -55,7 +57,7 @@ export class ReminderComponent implements OnInit {
     if (this.reminderTime !== undefined) {
       this.reminder.dateTimeOfRemind = this.createFullDateReminder(this.reminderDate, this.reminderTime);
 
-      this.dataService.addReminder(this.reminder)
+      this.reminderService.addReminder(this.reminder)
       this.router.navigate(['/']);
     }
   }

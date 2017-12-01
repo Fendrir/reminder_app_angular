@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
-import { DataService } from '../../services/data.service';
+import { ReminderFbService } from '../../services/reminder-fb.service';
 import { Reminder } from '../../models/Reminder';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-schedule',
@@ -13,15 +15,30 @@ import { Reminder } from '../../models/Reminder';
 export class ScheduleComponent implements OnInit {
   private subscription: Subscription;
 
-  private reminders: Reminder[];
-  
-  constructor(private dataService: DataService) { }
+  private reminders: any[] = [];
+  reminder: Reminder;
+
+  constructor(
+    private dataService: ReminderFbService,
+    public dialog: MatDialog,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
-    //check every minute of availability current reminder
-    this.subscription = TimerObservable.create(1000, 60000).subscribe(t => {
-      this.showCurrentReminder();
+    this.authService.afAuth.authState.subscribe(user => {
+      if (user) { // check authorized of user
+        //check every minute of availability current reminder
+        this.subscription = TimerObservable.create(1000, 60000).subscribe(t => {
+          console.log('tick');
+          this.dataService.getReminders().subscribe(reminders => { //get list of reminders
+            this.reminders = reminders;
+          });
+
+          this.showCurrentReminder();
+        });
+      }
     });
+
   }
 
 
@@ -30,12 +47,42 @@ export class ScheduleComponent implements OnInit {
                             new Date().getDate(), new Date().getHours(), new Date().getMinutes()); //create current date
 
     //searching of current reminder
-    this.dataService.getReminders().forEach(reminder => {
+    this.reminders.forEach(reminder => {
+      if (reminder.dateTimeOfRemind === nowDateTime.getTime()) {
+        this.reminder = reminder;
 
-      if (new Date(reminder.dateTimeOfRemind).getTime() == nowDateTime.getTime()) {
-        alert("ALARM!!!" + "\n\nTitle: " + reminder.title + "\n\nDescription: " + reminder.description + "\n\nNow: " + new Date(reminder.dateTimeOfRemind).toString());
+        this.openDialog();
       }
-
     });
   }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(ScheduleDialog, {
+      width: '250px',
+      data: { reminder: this.reminder }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+}
+
+
+//Component of dialog (entry component)
+@Component({
+  selector: 'schedule-dialog',
+  templateUrl: './schedule-dialog.html',
+  encapsulation: ViewEncapsulation.None
+})
+export class ScheduleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ScheduleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

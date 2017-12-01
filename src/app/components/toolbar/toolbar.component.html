@@ -1,28 +1,33 @@
 <!-- Main Toolbar -->
 <div [hidden]="isSearch">
-  <mat-toolbar color="primary" >
-      <h1>Reminder App</h1>
-      <span class="spacer"></span>
-      <button mat-icon-button (click)="isSearch = !isSearch">
-          <mat-icon aria-label="Search">search</mat-icon>
-      </button>
-  </mat-toolbar>
+    <mat-toolbar color="primary">
+        <button *ngIf="isLoggedIn" mat-icon-button (click)="sidenav.open()"><mat-icon>menu</mat-icon></button>
+        <h1>Reminder App</h1>
+        <span class="spacer"></span>
+        <button *ngIf="isLoggedIn" mat-icon-button (click)="isSearch = !isSearch">
+            <mat-icon aria-label="Search">search</mat-icon>
+        </button>
+
+
+
+    </mat-toolbar>
 </div>
 
 <!-- Search Toolbar -->
 <div [hidden]="!isSearch">
-  {{searchFieldOnFocus()}}
-  <mat-toolbar>
-      <button mat-icon-button (click)="isSearch = !isSearch; searchText='';typeSearchText($event)">
-          <mat-icon aria-label="back">arrow_back</mat-icon>
-      </button>
-      <form style="width: 100%">
-          <mat-form-field class="reminder-search-field">
-              <input matInput type="text" placeholder="" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" id=searchFieldFocus (keyup)="typeSearchText($event)" />
-              <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''; typeSearchText($event)">
-                <mat-icon>close</mat-icon>
-              </button>
+    {{searchFieldOnFocus()}}
+    <mat-toolbar>
+        <button mat-icon-button (click)="isSearch = !isSearch; searchText='';typeSearchText($event)">
+            <mat-icon aria-label="back">arrow_back</mat-icon>
+        </button>
+        <form style="width: 100%">
+            <mat-form-field class="reminder-search-field">
+                <input matInput type="text" placeholder="" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" id=searchFieldFocus
+                    (keyup)="typeSearchText($event)" />
+                <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''; typeSearchText($event)">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-form-field>
-      </form>
-  </mat-toolbar>
+        </form>
+    </mat-toolbar>
 </div>

@@ -1,6 +1,7 @@
 export interface Reminder {
-    title: string;
-    description: string;
-    dateTimeOfRemind: Date;
-    tags: string[];
+    $key?: string;
+    title?: string;
+    description?: string;
+    dateTimeOfRemind?: number;
+    tags?: string[];
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { ReminderFbService } from '../../services/reminder-fb.service';
 import { Reminder } from '../../models/Reminder';
+import { ActivatedRoute } from "@angular/router";
+import { concat } from 'rxjs/operator/concat';
 
 @Component({
   selector: 'app-reminders-list',
@@ -10,22 +13,65 @@ import { Reminder } from '../../models/Reminder';
 })
 export class RemindersListComponent implements OnInit {
 
-  reminders: Reminder[];
+  reminders: any[] = [];
 
   searchText: string;
+  period: string;
+
+  path: string;
 
   constructor(
-    public  dataService: DataService,
+    private dataService: DataService,
+    private reminderService: ReminderFbService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.reminders = this.dataService.getReminders();
-    
+    //subscribing on changes of period
+    this.dataService.currentPeriod.subscribe(period => {
+      this.period = period;
+
+      //subscribing on geting list of reminders
+      this.reminderService.getReminders().subscribe(reminders => {
+
+        //check perio and return list of necessary reminders
+        switch (this.period) {
+          case 'all': {
+            this.reminders = [];
+            this.reminders = reminders.reverse();
+            break;
+          }
+          case 'past': {
+            this.reminders = [];
+            reminders.forEach(element => {
+              if (element.dateTimeOfRemind < new Date().getTime()) {// < past
+                this.reminders.push(element);
+              }
+            });
+            this.reminders.reverse();
+            break;
+          }
+          case 'future': {
+            this.reminders = [];
+            reminders.forEach(element => {
+              if (element.dateTimeOfRemind > new Date().getTime()) {// > future
+                this.reminders.push(element);
+              }
+            });
+            this.reminders.reverse();
+            break;
+          }
+          default:
+            this.reminders = reminders.reverse();
+        }
+      });
+    });
+
     //subscribing on changes of search text
     this.dataService.currentSearch.subscribe(message => this.searchText = message);
   }
 
-  removeReminder(reminder) {
-    this.dataService.removeReminder(reminder);
+  removeReminder(id: string) {
+    this.reminderService.removeReminder(id);
   }
 }

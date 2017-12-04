@@ -26,6 +26,8 @@ import { TagsBarComponent } from './components/tags-bar/tags-bar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { ScheduleDialog } from './components/schedule/schedule.component';
 import { LoginComponent } from './components/login/login.component';
+import { TabRegLogComponent } from './components/tab-reg-log/tab-reg-log.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 //Material Design imports
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,8 +35,9 @@ import {
   MatButtonModule, MatIconModule, MatInputModule,
   MatToolbarModule, MatCardModule, MatDatepickerModule, 
   MatNativeDateModule, MatChipsModule, MatSidenavModule,
-  MatListModule, MatLineModule, MatDialogModule
+  MatListModule, MatLineModule, MatDialogModule, MatTabsModule
 } from '@angular/material';
+
 
 
 export const firebaseconfig = {
@@ -49,7 +52,7 @@ export const firebaseconfig = {
 const routes: Routes = [
   { path: '', component: RemindersListComponent, canActivate:[AuthGuard] },
   { path: 'reminder', component: ReminderComponent, canActivate:[AuthGuard] },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: TabRegLogComponent }
 ]
 
 @NgModule({
@@ -62,7 +65,9 @@ const routes: Routes = [
     FilterPipe,
     ScheduleComponent,
     LoginComponent,
-    ScheduleDialog
+    ScheduleDialog,
+    TabRegLogComponent,
+    RegistrationComponent
   ],
   entryComponents: [
     ScheduleDialog
@@ -75,7 +80,7 @@ const routes: Routes = [
     MatButtonModule, MatIconModule, MatInputModule, MatChipsModule,
     MatToolbarModule, MatCardModule, MatNativeDateModule, MatDatepickerModule,
     FormsModule, ReactiveFormsModule, MatSidenavModule, MatListModule, MatLineModule,
-    MatDialogModule
+    MatDialogModule, MatTabsModule
   ],
   providers: [
     DataService, AngularFireDatabase, AngularFireAuth, ReminderFbService, 

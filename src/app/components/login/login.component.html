@@ -25,7 +25,10 @@
     <br>
     <br>
 
-    <input type="submit" class="mat-raised-button mat-primary" value="Log in">
-
+    
+    <mat-card-actions>
+        <input type="submit" class="mat-raised-button mat-primary" value="Log in">
+        <a mat-button (click)="gmailLogin()"><img src="assets/img/google.png">Sign in with Google</a>
+    </mat-card-actions>
 </form>
 </mat-card>

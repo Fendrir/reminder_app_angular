@@ -4,12 +4,12 @@ import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
 
   hide = true;//for password input
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     Validators.email
   ]);
   passwordFormControl = new FormControl('', [
-    Validators.required,
+    Validators.required
   ]);
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.emailFormControl.valid && this.passwordFormControl.valid) {
 
-      this.authService.login(this.email, this.password)
+      this.authService.register(this.email, this.password)
         .then((res) => {
-          console.log("Loged in");
+          console.log("Registered and Loged in");
           this.router.navigate(['/']);
         })
         .catch((err) => {
@@ -44,15 +44,4 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  gmailLogin() {
-    this.authService.gmailLogin()
-      .then((res) => {
-        console.log("Loged in");
-        this.router.navigate(['/']);
-      })
-      .catch((err) => {
-        console.log("Error");
-        this.router.navigate(['/login']);
-      });
-  }
 }

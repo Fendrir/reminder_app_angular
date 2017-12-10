@@ -7,9 +7,10 @@
     {
       "root": "src",
       "outDir": "dist",
+      "serviceWorker": true,
       "assets": [
         "assets",
-        "favicon.ico"
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",

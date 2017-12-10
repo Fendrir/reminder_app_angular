@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Reminder } from '../models/Reminder';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class DataService {
@@ -9,6 +9,9 @@ export class DataService {
 
   private period = new BehaviorSubject<string>('all');//for binding between components "sideNav" and "reminders-list"
   currentPeriod = this.period.asObservable();//for binding between components "sideNav" and "reminders-list"
+
+  private notificationGranted = new BehaviorSubject<boolean>(null);//for checking of notification granted
+  currentnNotificationGranted = this.notificationGranted.asObservable();//for checking of notification granted
 
   constructor() {
   }
@@ -22,6 +25,11 @@ export class DataService {
   //for binding between components "sideNav" and "reminders-list"
   changePeriod(period: string) {
     this.period.next(period);
+  }
+
+  //for checking of notification granted 
+  changeNotificationGranted(notificationGranted: boolean) {
+    this.notificationGranted.next(notificationGranted);
   }
 
 

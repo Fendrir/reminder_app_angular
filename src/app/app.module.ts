@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgServiceWorker } from "@angular/service-worker";
 
 //AngularFire imports
 import { AngularFireModule } from "angularfire2";
@@ -35,7 +36,8 @@ import {
   MatButtonModule, MatIconModule, MatInputModule,
   MatToolbarModule, MatCardModule, MatDatepickerModule, 
   MatNativeDateModule, MatChipsModule, MatSidenavModule,
-  MatListModule, MatLineModule, MatDialogModule, MatTabsModule
+  MatListModule, MatLineModule, MatDialogModule, MatTabsModule,
+  MatSnackBarModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 
@@ -80,11 +82,11 @@ const routes: Routes = [
     MatButtonModule, MatIconModule, MatInputModule, MatChipsModule,
     MatToolbarModule, MatCardModule, MatNativeDateModule, MatDatepickerModule,
     FormsModule, ReactiveFormsModule, MatSidenavModule, MatListModule, MatLineModule,
-    MatDialogModule, MatTabsModule
+    MatDialogModule, MatTabsModule, MatSnackBarModule, MatProgressSpinnerModule
   ],
   providers: [
     DataService, AngularFireDatabase, AngularFireAuth, ReminderFbService, 
-    AuthService,AuthGuard
+    AuthService,AuthGuard, NgServiceWorker
   ],
   bootstrap: [AppComponent]
 })

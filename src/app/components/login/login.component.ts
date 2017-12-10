@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +25,17 @@ export class LoginComponent implements OnInit {
     Validators.required,
   ]);
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit() {
+    this.authService.getAuth().subscribe(auth => {
+      if (auth) {
+        this.router.navigate(['/']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   onSubmit() {
@@ -45,14 +54,6 @@ export class LoginComponent implements OnInit {
   }
 
   gmailLogin() {
-    this.authService.gmailLogin()
-      .then((res) => {
-        console.log("Loged in");
-        this.router.navigate(['/']);
-      })
-      .catch((err) => {
-        console.log("Error");
-        this.router.navigate(['/login']);
-      });
+    this.authService.gmailLogin();
   }
 }

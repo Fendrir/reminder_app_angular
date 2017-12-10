@@ -1,0 +1,49 @@
+{
+    "routing": {
+        "index": "/index.html",
+        "routes": {
+            "/": {
+                "match": "exact"
+            },
+            "/login": {
+                "match": "exact"
+            },
+            "/reminder": {
+                "match": "exact"
+            }
+        }
+    },
+    "static.ignore": [
+        "^\/icons\/.*$"
+    ],
+    "external": {
+        "urls": [
+            {
+                "url": "https://fonts.googleapis.com/icon?family=Material+Icons"
+            }
+        ]
+    },
+    "dynamic": {
+        "group": [
+            {
+                "name": "api",
+                "urls": {
+                    "https://reminder-6ad3b.firebaseio.com/reminders": {
+                        "match": "prefix"
+                    }
+                },
+                "cache": {
+                    "optimizeFor": "freshness",
+                    "networkTimeoutMs": 1000,
+                    "maxEntries": 30,
+                    "strategy": "lru",
+                    "maxAgeMs": 360000000
+                }
+            }
+        ]
+    },
+    "push": {
+        "showNotifications": true,
+        "backgroundOnly": false
+    }
+}

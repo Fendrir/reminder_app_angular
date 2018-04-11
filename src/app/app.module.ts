@@ -43,11 +43,13 @@ import {
 
 
 export const firebaseconfig = {
-  apiKey: "AIzaSyCE3T-Z8V4EAmWDm2jehyIfhso5xYq2D3Y",
-  authDomain: "reminder-6ad3b.firebaseapp.com",
-  databaseURL: "https://reminder-6ad3b.firebaseio.com",
-  storageBucket: "reminder-6ad3b.appspot.com",
-  messagingSenderId: "528587683171"
+  apiKey: "AIzaSyAvBhXxG24vizj1lrptds4sjIa7KYcZMJ8",
+  authDomain: "projetevent-ffe09.firebaseapp.com",
+  databaseURL: "https://projetevent-ffe09.firebaseio.com",
+  projectId: "projetevent-ffe09",
+  storageBucket: "",
+  messagingSenderId: "265431047224"
+
 }
 
 

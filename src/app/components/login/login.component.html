@@ -1,14 +1,14 @@
 <mat-card>
 <form class="login-form" (ngSubmit)="onSubmit()">
 
-  <h1>Login</h1>
+  <h1>Se connecter</h1>
   <br>
 
   <!-- Email Input -->
   <mat-form-field class="login-full-width">
-    <input matInput [formControl]="emailFormControl" placeholder="Email" name="email" type="email" [(ngModel)]="email">
+    <input matInput [formControl]="emailFormControl" placeholder="Entrez votre adresse Mail" name="email" type="email" [(ngModel)]="email">
     <mat-error *ngIf="emailFormControl.hasError('email')">
-        Not a <strong>valid</strong> email!
+        Email <strong>non valide</strong> !
     </mat-error>
   </mat-form-field>
   <br>
@@ -16,10 +16,10 @@
 
    <!-- Password Input -->
    <mat-form-field class="login-full-width">
-      <input matInput [formControl]="passwordFormControl" placeholder="Enter your password" name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="password">
+      <input matInput [formControl]="passwordFormControl" placeholder="Entrez votre mot de passe" name="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="password">
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
       <mat-error *ngIf="passwordFormControl.hasError('required')">
-          Password is <strong>required</strong>!
+          Mot de passe <strong>obligatoire</strong> !
       </mat-error>
     </mat-form-field>
     <br>
@@ -27,8 +27,13 @@
 
     
     <mat-card-actions>
-        <input type="submit" class="mat-raised-button mat-primary" value="Log in">
-        <a mat-button (click)="gmailLogin()"><img src="assets/img/google.png">Sign in with Google</a>
+        <input type="submit" class="mat-raised-button mat-primary" value="Se connecter">
+        <a mat-button (click)="gmailLogin()"><img src="assets/img/google.png">Se connecter avec Google</a>
     </mat-card-actions>
+
 </form>
+    <div class="reset-pass-full-width">
+        <button *ngIf="!resetPassword" class="mat-raised-button mat-warn" (click)="sendResetEmail()">Reset le mot de passe de {{email}}</button>
+        <p *ngIf="resetPassword" class="text-success">Si vous avez un compte à cette adresse, vous avez reçu un mail pour changer votre mot de passe !</p>
+    </div>
 </mat-card>

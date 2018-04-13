@@ -2,7 +2,7 @@
     <mat-sidenav #sidenav>
         <br>
         <mat-list>
-            <h3 mat-subheader>User's email:</h3>
+            <h3 mat-subheader>Email utilisateur:</h3>
             <mat-list-item>
                 <mat-icon mat-list-icon><i class="material-icons">account_circle</i></mat-icon>
                 <h4 mat-line>{{ loggedInUser }}</h4>
@@ -13,25 +13,25 @@
             
             <a mat-list-item (click)="sidenav.close(); setPeriod('all')">
                 <mat-icon mat-list-icon>list</mat-icon>
-                <h4 mat-line>All Reminders</h4>
-                <p style="color: gray" mat-line>All your reminders </p>
+                <h4 mat-line>Tout les événements</h4>
+                <p style="color: gray" mat-line>Tout vos événements </p>
             </a>
 
             <a mat-list-item (click)="sidenav.close(); setPeriod('past')">
                 <mat-icon mat-list-icon>alarm_off</mat-icon>
-                <h4 mat-line>Worked</h4>
-                <p style="color: gray" mat-line>Reminders that was worked </p>
+                <h4 mat-line>Anciens événements</h4>
+                <p style="color: gray" mat-line>Evénements passés </p>
             </a>
 
             <a mat-list-item (click)="sidenav.close(); setPeriod('future')">
                 <mat-icon mat-list-icon>alarm_on</mat-icon>
-                <h4 mat-line>Not Yet Worked</h4>
-                <p style="color: gray" mat-line>Reminders wich will be worked </p>
+                <h4 mat-line>Prochains événements</h4>
+                <p style="color: gray" mat-line>Evénements pas encore passés </p>
             </a>
             
             <a mat-list-item (click)="sidenav.close(); logout()">
                 <mat-icon mat-list-icon>exit_to_app</mat-icon>
-                <h4 mat-line>Logout</h4>
+                <h4 mat-line>Déconnexion</h4>
             </a>
         
         </mat-list>

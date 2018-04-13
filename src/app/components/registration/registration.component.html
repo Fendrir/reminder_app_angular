@@ -1,14 +1,14 @@
 <mat-card>
   <form class="registration-form" (ngSubmit)="onSubmit()">
 
-    <h1>Registration</h1>
+    <h1>S'enregistrer</h1>
     <br>
 
     <!-- Email Input -->
     <mat-form-field class="registration-full-width">
-      <input matInput [formControl]="emailFormControl" placeholder="Email" name="email" type="email" [(ngModel)]="email">
+      <input matInput [formControl]="emailFormControl" placeholder="Adresse Email" name="email" type="email" [(ngModel)]="email">
       <mat-error *ngIf="emailFormControl.hasError('email')">
-        Not a <strong>valid</strong> email!
+        Email <strong>non valide</strong> !
       </mat-error>
     </mat-form-field>
     <br>
@@ -16,18 +16,18 @@
 
     <!-- Password Input -->
     <mat-form-field class="registration-full-width">
-      <input matInput [formControl]="passwordFormControl" placeholder="Enter your password" name="password" [type]="hide ? 'password' : 'text'"
+      <input matInput [formControl]="passwordFormControl" placeholder="Entrez votre mot de passe" name="password" [type]="hide ? 'password' : 'text'"
         [(ngModel)]="password">
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
       <mat-error *ngIf="passwordFormControl.hasError('required')">
-        Password is <strong>required</strong>!
+        Mot de passe <strong>obligatoire</strong> !
       </mat-error>
     </mat-form-field>
     <br>
     <br>
 
     <mat-card-actions>
-      <input type="submit" class="mat-raised-button mat-primary" value="To Register">
+      <input type="submit" class="mat-raised-button mat-primary" value="S'enregistrer">
     </mat-card-actions>
   </form>
 </mat-card>

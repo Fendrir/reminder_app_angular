@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 
@@ -21,6 +21,14 @@ export class AuthService {
   // Check User Status
   getAuth() {
     return this.afAuth.authState.map(auth => auth);
+  }
+
+  // Reset Password
+
+  resetPassword(email: string) {
+    return this.afAuth.auth.sendPasswordResetEmail(email)
+      .then(() => console.log('sent Password Reset Email!'))
+      .catch((error) => console.log(error));
   }
 
   // Logout User

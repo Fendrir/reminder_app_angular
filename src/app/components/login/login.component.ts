@@ -12,7 +12,11 @@ import * as firebase from 'firebase/app';
 })
 export class LoginComponent implements OnInit {
 
-  hide = true;//for password input
+  errorMessage = '';
+  error: {name: string, message: string} = {name: '', message: ''};
+  resetPassword = false;
+
+  hide = true; // for password input
 
   email: string;
   password: string;
@@ -38,16 +42,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  clearErrorMessage() {
+    this.errorMessage = '';
+    this.error = {name: '', message: ''};
+  }
+
   onSubmit() {
     if (this.emailFormControl.valid && this.passwordFormControl.valid) {
 
       this.authService.login(this.email, this.password)
         .then((res) => {
-          console.log("Loged in");
+          console.log('Loged in');
           this.router.navigate(['/']);
         })
         .catch((err) => {
-          console.log("Error");
+          console.log('Error');
           this.router.navigate(['/login']);
         });
     }
@@ -56,4 +65,15 @@ export class LoginComponent implements OnInit {
   gmailLogin() {
     this.authService.gmailLogin();
   }
+
+  sendResetEmail() {
+    this.clearErrorMessage();
+
+    this.authService.resetPassword(this.email)
+      .then(() => this.resetPassword = true)
+      .catch(_error => {
+        this.error = _error;
+      });
+  }
+
 }

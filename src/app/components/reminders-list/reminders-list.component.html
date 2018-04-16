@@ -1,9 +1,9 @@
 <div *ngFor="let reminder of reminders | filter : searchText">
   <mat-card>
     <mat-card-title>{{reminder.title}}</mat-card-title>
-    <mat-card-subtitle>Will work at : {{reminder.dateTimeOfRemind | date}} {{reminder.dateTimeOfRemind | date:"HH:mm"}}</mat-card-subtitle>
+    <mat-card-subtitle>Evénement ce tenant le : {{reminder.dateTimeOfRemind | date}} {{reminder.dateTimeOfRemind | date:"HH:mm"}}</mat-card-subtitle>
     <mat-card-content>
-      <p style="color: gray">Desscription:</p>
+      <p style="color: gray">Description:</p>
       {{reminder.description}}
     </mat-card-content>
     
@@ -12,7 +12,7 @@
     </mat-chip-list>
 
     <mat-card-actions>
-      <button mat-button color="warn" (click)="removeReminder(reminder.key)">Delete</button>
+      <button mat-button color="warn" (click)="removeReminder(reminder.key)">Supprimer</button>
     </mat-card-actions>
   </mat-card>
   <br>

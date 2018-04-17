@@ -4,6 +4,12 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 
+// implent admin
+
+import { User } from '../user/user';
+import { switchMap } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+
 @Injectable()
 export class AuthService {
 

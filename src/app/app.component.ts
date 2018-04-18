@@ -13,6 +13,7 @@ import { NgServiceWorker, NgPushRegistration } from '@angular/service-worker';  
 })
 export class AppComponent {
 
+  loggedInPseudo: string;
   loggedInUser: string;
   period: string;
   notificationGranted: boolean;

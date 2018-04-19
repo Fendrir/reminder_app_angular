@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Subscription } from "rxjs";
-import { TimerObservable } from "rxjs/observable/TimerObservable";
+import { Subscription } from 'rxjs';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { ReminderFbService } from '../../services/reminder-fb.service';
 import { Reminder } from '../../models/Reminder';
 import { AuthService } from '../../services/auth.service';
-import { DataService } from "../../services/data.service";
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-schedule',
@@ -28,15 +28,15 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //subscribing on changes of notificationGranted
+    // subscribing on changes of notificationGranted
     this.dataService.currentnNotificationGranted.subscribe(granted => this.notificationGranted = granted);
 
     this.authService.afAuth.authState.subscribe(user => {
       if (user) { // check authorized of user
-        //check every minute of availability current reminder
+        // check every minute of availability current reminder
         this.subscription = TimerObservable.create(1000, 60000).subscribe(t => {
           console.log('tick');
-          this.reminderService.getReminders().subscribe(reminders => { //get list of reminders
+          this.reminderService.getReminders().subscribe(reminders => { // get list of reminders
             this.reminders = reminders;
           });
 
@@ -52,7 +52,7 @@ export class ScheduleComponent implements OnInit {
     let nowDateTime: Date = new Date(new Date().getFullYear(), new Date().getMonth(),
       new Date().getDate(), new Date().getHours(), new Date().getMinutes()); //create current date
 
-    //searching of current reminder
+    // searching of current reminder
     this.reminders.forEach(reminder => {
       if (reminder.dateTimeOfRemind === nowDateTime.getTime()) {
         this.reminder = reminder;
@@ -62,13 +62,13 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  //show notification
+  // show notification
   notify(title: string, description: string) {
 
     var options = {
       body: description,
       icon: '/assets/icons/reminder-notify.png',
-    }
+    };
 
     if (this.notificationGranted) {
       navigator.serviceWorker.ready.then(registration => {
@@ -91,7 +91,7 @@ export class ScheduleComponent implements OnInit {
 }
 
 
-//Component of dialog (entry component)
+// Component of dialog (entry component)
 @Component({
   selector: 'schedule-dialog',
   templateUrl: './schedule-dialog.html',

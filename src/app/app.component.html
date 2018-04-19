@@ -1,51 +1,51 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav>
-        <br>
-        <mat-list>
-            <h3 mat-subheader>Email utilisateur:</h3>
-            <mat-list-item>
-                <mat-icon mat-list-icon><i class="material-icons">account_circle</i></mat-icon>
-                <h4 mat-line>{{ loggedInUser }}</h4>
-            </mat-list-item>
-            <hr>
             <br>
-            <h3 mat-subheader>Actions: </h3>
-            
-            <a mat-list-item (click)="sidenav.close(); setPeriod('all')">
-                <mat-icon mat-list-icon>list</mat-icon>
-                <h4 mat-line>Tout les événements</h4>
-                <p style="color: gray" mat-line>Tout vos événements </p>
-            </a>
-
-            <a mat-list-item (click)="sidenav.close(); setPeriod('past')">
-                <mat-icon mat-list-icon>alarm_off</mat-icon>
-                <h4 mat-line>Anciens événements</h4>
-                <p style="color: gray" mat-line>Evénements passés </p>
-            </a>
-
-            <a mat-list-item (click)="sidenav.close(); setPeriod('future')">
-                <mat-icon mat-list-icon>alarm_on</mat-icon>
-                <h4 mat-line>Prochains événements</h4>
-                <p style="color: gray" mat-line>Evénements pas encore passés </p>
-            </a>
-            
-            <a mat-list-item (click)="sidenav.close(); logout()">
-                <mat-icon mat-list-icon>exit_to_app</mat-icon>
-                <h4 mat-line>Déconnexion</h4>
-            </a>
+            <mat-list>
+                <h3 mat-subheader>Email utilisateur:</h3>
+                <mat-list-item>
+                    <mat-icon mat-list-icon><i class="material-icons">account_circle</i></mat-icon>
+                    <h4 mat-line>{{ loggedInUser }}</h4>
+                </mat-list-item>
+                <hr>
+                <br>
+                <h3 mat-subheader>Actions: </h3>
+                
+                <a mat-list-item (click)="sidenav.close(); setPeriod('all')">
+                    <mat-icon mat-list-icon>list</mat-icon>
+                    <h4 mat-line>Tout les événements</h4>
+                    <p style="color: gray" mat-line>Tout vos événements </p>
+                </a>
+                
+                <a mat-list-item (click)="sidenav.close(); setPeriod('past')">
+                    <mat-icon mat-list-icon>alarm_off</mat-icon>
+                    <h4 mat-line>Anciens événements</h4>
+                    <p style="color: gray" mat-line>Evénements passés </p>
+                </a>
+                
+                <a mat-list-item (click)="sidenav.close(); setPeriod('future')">
+                    <mat-icon mat-list-icon>alarm_on</mat-icon>
+                    <h4 mat-line>Prochains événements</h4>
+                    <p style="color: gray" mat-line>Evénements pas encore passés </p>
+                </a>
+                
+                <a mat-list-item (click)="sidenav.close(); logout()">
+                    <mat-icon mat-list-icon>exit_to_app</mat-icon>
+                    <h4 mat-line>Déconnexion</h4>
+                </a>
+                
+            </mat-list>
+        </mat-sidenav>
         
-        </mat-list>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-        <!-- Content -->
-        <app-toolbar [sidenav]="sidenav"></app-toolbar>
-        <br>
-        <app-schedule></app-schedule>
-        <div class="contnet">
-            <router-outlet></router-outlet>
-        </div>
-        <!-- /Content -->
-    </mat-sidenav-content>
-
-</mat-sidenav-container>
+        <mat-sidenav-content>
+            <!-- Content -->
+            <app-toolbar [sidenav]="sidenav"></app-toolbar>
+            <br>
+            <app-schedule></app-schedule>
+            <div class="contnet">
+                <router-outlet></router-outlet>
+            </div>
+            <!-- /Content -->
+        </mat-sidenav-content>
+    
+    </mat-sidenav-container>

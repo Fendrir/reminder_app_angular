@@ -6,6 +6,11 @@ import { DataService } from './services/data.service';
 import { MatSnackBar } from '@angular/material';
 import { NgServiceWorker, NgPushRegistration } from '@angular/service-worker';    //npm install --save @angular/service-worker@"~1.0.0-beta"
 
+// test recup données pseudo
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+// fin de test
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +18,11 @@ import { NgServiceWorker, NgPushRegistration } from '@angular/service-worker';  
 })
 export class AppComponent {
 
-  loggedInPseudo: string;
+  // test données utilisateur sup
+  userInfoSupDb: AngularFireList<any>;
+  userInfo: Observable<any[]>;
+  // fin de test
+
   loggedInUser: string;
   period: string;
   notificationGranted: boolean;
@@ -24,8 +33,18 @@ export class AppComponent {
     private reminderService: ReminderFbService,
     private dataService: DataService,
     private snackBar: MatSnackBar,
-    private ngsw: NgServiceWorker
-  ) {}
+    private ngsw: NgServiceWorker,
+    db: AngularFireDatabase
+  ) {
+    // test conexion bdd
+    this.userInfoSupDb = db.list(`userProfile`);
+    this.userInfo = this.userInfoSupDb.snapshotChanges().map(changes => {
+      return changes.map(c => ({
+        key: c.payload.key, ...c.payload.val()
+      }));
+    });
+    // fin de test
+  }
 
 
   ngOnInit() {

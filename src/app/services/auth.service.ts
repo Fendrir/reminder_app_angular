@@ -110,7 +110,6 @@ export class AuthService {
         //   pseudo: pseudo,
         //   simpleUser : simpleUser
         // });
-
       await firebase
         .database()
         .ref(`/userProfile/${newUser.uid}/email`)

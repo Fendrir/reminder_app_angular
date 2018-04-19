@@ -24,7 +24,7 @@ export class TagsBarComponent implements OnInit {
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
 
-  @Input() tags: string[] = []; //for binding with parent component "reminders-list"
+  @Input() tags: string[] = []; // for binding with parent component "reminders-list"
 
 
   add(event: MatChipInputEvent): void {

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     Validators.required,
   ]);
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
@@ -62,9 +62,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  gmailLogin() {
-    this.authService.gmailLogin();
-  }
+  // gmailLogin() {
+  //   this.authService.gmailLogin();
+  // }
 
   sendResetEmail() {
     this.clearErrorMessage();

@@ -1,11 +1,12 @@
-export interface User {
+export interface UserInfo {
     uid: string;
     email: string;
-    pseudo: string;
-    roles: Roles;
+    simpleUser: boolean;
+    // pseudo: string;
+    // roles: Roles;
 }
 
-export interface Roles {
-    admin?: boolean;
-    simpleUser?: boolean;
-}
+// export interface Roles {
+//     admin?: boolean;
+//     simpleUser?: boolean;
+// }

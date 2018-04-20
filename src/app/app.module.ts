@@ -15,6 +15,9 @@ import { ReminderFbService } from './services/reminder-fb.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 
+// Core Module imports
+import { CoreModule } from './services/core.module';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { FilterPipe } from './pipes/filter.pipe';
 
@@ -77,10 +80,12 @@ const routes: Routes = [
     ScheduleDialog
   ],
   imports: [
+    AngularFirestoreModule,
     AngularFireModule.initializeApp(firebaseconfig),
     RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
+    CoreModule,
     MatButtonModule, MatIconModule, MatInputModule, MatChipsModule,
     MatToolbarModule, MatCardModule, MatNativeDateModule, MatDatepickerModule,
     FormsModule, ReactiveFormsModule, MatSidenavModule, MatListModule, MatLineModule,

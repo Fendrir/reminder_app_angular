@@ -125,7 +125,8 @@ export class AuthService {
       const data: UserInfo = {
         uid: user.uid,
         email: user.email,
-        simpleUser: true
+        simpleUser: true,
+        adminUser: false
       };
       return userRef.set(data, { merge: true});
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Reminder } from '../../models/Reminder';
-//import { DataService } from '../../services/data.service';
+// import { DataService } from '../../services/data.service';
 import { ReminderFbService } from '../../services/reminder-fb.service';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
@@ -26,20 +26,20 @@ export class ReminderComponent implements OnInit {
     Validators.required,
   ]);
 
-  //variables
+  // variables
   reminder: Reminder = {
     title: '',
     description: '',
     dateTimeOfRemind: 0,
     tags: new Array()
   };
-  reminderDate: Date; //binding with datetimepicker
-  reminderTime: string; //binding with input of "time" type
-  minDate = new Date(); //a minimum date (today) for datetimepicker (because it can't create a reminder in the past)
+  reminderDate: Date; // binding with datetimepicker
+  reminderTime: string; // binding with input of "time" type
+  minDate = new Date(); // a minimum date (today) for datetimepicker (because it can't create a reminder in the past)
 
 
   constructor(
-    //private dataService: DataService,
+    // private dataService: DataService,
     private reminderService: ReminderFbService,
     private router: Router
   ) {  }
@@ -47,17 +47,17 @@ export class ReminderComponent implements OnInit {
   ngOnInit() {
   }
 
-  //to create a date for the property "Reminder.dateTimeOfRemind"
+  // to create a date for the property "Reminder.dateTimeOfRemind"
   createFullDateReminder(reminderDate: Date, reminderTime: string) {
-      return new Date(Date.parse(reminderDate.toDateString() + " " + reminderTime)).getTime();
+      return new Date(Date.parse(reminderDate.toDateString() + ' ' + reminderTime)).getTime();
   }
 
   onSubmit({ value, valid }: { value: Reminder, valid: boolean }) {
-    //checking for an empty value in input of "time" type. This is for to create a valid date
+    // checking for an empty value in input of "time" type. This is for to create a valid date
     if (this.reminderTime !== undefined) {
       this.reminder.dateTimeOfRemind = this.createFullDateReminder(this.reminderDate, this.reminderTime);
 
-      this.reminderService.addReminder(this.reminder)
+      this.reminderService.addReminder(this.reminder);
       this.router.navigate(['/']);
     }
   }

@@ -8,7 +8,8 @@
     <mat-form-field class="registration-full-width">
       <input matInput [formControl]="emailFormControl" placeholder="Adresse Email" name="email" type="email" [(ngModel)]="email">
       <mat-error *ngIf="emailFormControl.hasError('email')">
-        Email <strong>non valide</strong> !
+        Email
+        <strong>non valide</strong> !
       </mat-error>
     </mat-form-field>
     <br>
@@ -20,7 +21,19 @@
         [(ngModel)]="password">
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
       <mat-error *ngIf="passwordFormControl.hasError('required')">
-        Mot de passe <strong>obligatoire</strong> !
+        Mot de passe
+        <strong>obligatoire</strong> !
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+
+    <!-- Email Input -->
+    <mat-form-field class="registration-full-width">
+      <input matInput [formControl]="pseudoFormControl" placeholder="Pseudonyme" name="pseudo" type="text" [(ngModel)]="pseudo">
+      <mat-error *ngIf="pseudoFormControl.hasError('required')">
+        Pseudonyme
+        <strong>non valide</strong> !
       </mat-error>
     </mat-form-field>
     <br>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-import { Observable } from "rxjs";
-import { Reminder } from "../models/Reminder";
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs';
+import { Reminder } from '../models/Reminder';
 import { AuthService } from '../services/auth.service';
 import 'rxjs/add/operator/map';
 import { query } from '@angular/core/src/animation/dsl';
@@ -23,6 +23,7 @@ export class ReminderFbService {
 
 
   getReminders() {
+
     if (!this.userId) return;
 
 

@@ -1,4 +1,7 @@
 <mat-card>
+    <div *ngIf="authService.userInfo$ | async;">
+    <!-- template will replace this div -->
+    </div>
 <form class="login-form" (ngSubmit)="onSubmit()">
 
   <h1>Se connecter</h1>
@@ -25,11 +28,10 @@
     <br>
     <br>
 
-    
-    <mat-card-actions>
-        <input type="submit" class="mat-raised-button mat-primary" value="Se connecter">
-        <a mat-button (click)="gmailLogin()"><img src="assets/img/google.png">Se connecter avec Google</a>
-    </mat-card-actions>
+        <mat-card-actions>
+            <input type="submit" class="mat-raised-button mat-primary" value="Se connecter">
+            <a mat-button (click)="authService.gmailLogin()"><img src="assets/img/google.png">Se connecter avec Google</a>
+        </mat-card-actions>
 
 </form>
     <div class="reset-pass-full-width">

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ReminderFbService } from '../../services/reminder-fb.service';
 import { Reminder } from '../../models/Reminder';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { concat } from 'rxjs/operator/concat';
 
 @Component({
@@ -27,14 +27,14 @@ export class RemindersListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //subscribing on changes of period
+    // subscribing on changes of period
     this.dataService.currentPeriod.subscribe(period => {
       this.period = period;
 
-      //subscribing on geting list of reminders
+      // subscribing on geting list of reminders
       this.reminderService.getReminders().subscribe(reminders => {
 
-        //check perio and return list of necessary reminders
+        // check perio and return list of necessary reminders
         switch (this.period) {
           case 'all': {
             this.reminders = [];
@@ -67,7 +67,7 @@ export class RemindersListComponent implements OnInit {
       });
     });
 
-    //subscribing on changes of search text
+    // subscribing on changes of search text
     this.dataService.currentSearch.subscribe(message => this.searchText = message);
   }
 

@@ -3,7 +3,7 @@
       <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
                [removable]="removable" (remove)="remove(tag)">
         {{tag}}
-        <mat-icon matChipRemove *ngIf="removable">Annuler</mat-icon>
+        <mat-icon matChipRemove *ngIf="removable">close</mat-icon>
       </mat-chip>
       <input placeholder="Ajoutez vos tags ..."
              [matChipInputFor]="chipList"
